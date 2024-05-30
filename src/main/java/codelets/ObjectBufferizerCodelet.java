@@ -40,6 +40,8 @@ public class ObjectBufferizerCodelet extends Codelet {
         Idea detectedObjectsIdea = detectedObjectsMI.getIdea().get("object");
         addObjectToTimeStep(objectsBufferIdeaList, detectedObjectsIdea);
 
+//        System.out.println(detectedObjectsIdea.toStringFull());
+
         objectBufferMI.postIdea((Idea) objectsBufferIdea);
         objectBufferMO.setI("");
     }

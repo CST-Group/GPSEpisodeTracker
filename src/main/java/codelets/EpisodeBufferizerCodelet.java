@@ -5,9 +5,8 @@ import br.unicamp.cst.core.entities.Memory;
 import br.unicamp.cst.core.entities.MemoryObject;
 import br.unicamp.cst.representation.idea.Idea;
 import memory_storage.MemoryInstance;
+import utils.JsonFileAppender;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class EpisodeBufferizerCodelet extends Codelet {
@@ -16,6 +15,7 @@ public class EpisodeBufferizerCodelet extends Codelet {
     private Memory episodeBufferMO;
     MemoryInstance episodeMI;
     MemoryInstance episodeBufferMI;
+    JsonFileAppender jsonFileAppender;
 
     private int buffer_size = 5;
     private Idea episodeBuffer = new Idea("episodeBuffer","",0);
@@ -23,6 +23,7 @@ public class EpisodeBufferizerCodelet extends Codelet {
     public EpisodeBufferizerCodelet(MemoryInstance episodeMI, MemoryInstance episodeBufferMI) {
         this.episodeMI = episodeMI;
         this.episodeBufferMI = episodeBufferMI;
+        jsonFileAppender = new JsonFileAppender("episodes");
     }
 
     @Override
@@ -47,6 +48,7 @@ public class EpisodeBufferizerCodelet extends Codelet {
                 .map(event->event.getName())
                 .collect(Collectors.toList()));
 
+        jsonFileAppender.appendJsonToFile(episodeFrame);
     }
 
 

@@ -6,20 +6,25 @@ import br.unicamp.cst.representation.idea.Idea;
 import environment.CSTCollectorConnector;
 import environment.Environment;
 import memory_storage.MemoryInstance;
+import utils.JsonFileAppender;
+import java.time.Duration;
+
 
 import java.io.IOException;
 
 public class RAWDataBufferizerCodelet extends Codelet {
     private Environment e;
 
+
     private Memory rawDataMO;
     private MemoryInstance rawDataMI;
 
-    private int buffer_size = 10;
+    private int buffer_size = 2;
     private double firstTimestamp;
     private boolean firstCall = true;
 
     private long lastConnectionTimestamp = -1;
+    private JsonFileAppender jsonFileAppender;
 
 
     // idea_buffer contains "frames" that have an ArrayList of Ideas;
@@ -30,6 +35,7 @@ public class RAWDataBufferizerCodelet extends Codelet {
 
     public RAWDataBufferizerCodelet(MemoryInstance memoryInstance) {
         this.rawDataMI = memoryInstance;
+        jsonFileAppender = new JsonFileAppender("positions");
     }
 
     @Override
@@ -53,7 +59,9 @@ public class RAWDataBufferizerCodelet extends Codelet {
             rawDataMI.postIdea(idea_buffer);
             rawDataMO.setI("");
 
-            System.out.println(currentPosition.toStringFull());
+//            System.out.println(currentPosition.toStringFull());
+
+            jsonFileAppender.appendJsonToFile(currentPosition);
 
             lastConnectionTimestamp = rvcTimestamp;
         }
@@ -94,7 +102,7 @@ public class RAWDataBufferizerCodelet extends Codelet {
         }
 
         if (firstCall)  {
-            frames.getL().get(0).get("timestamp").setValue(Double.valueOf((Long) currentPosition.get("timestamp").getValue()));
+            frames.getL().get(0).get("timestamp").setValue(Double.valueOf(0));
             this.firstTimestamp = Double.valueOf((Long) currentPosition.get("timestamp").getValue());
             firstCall = false;
         }   else {

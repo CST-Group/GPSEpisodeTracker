@@ -1,0 +1,1 @@
+{"id":20,"name":"position","value":"","l":[{"id":21,"name":"latitude","value":-22.8411789,"l":[],"type":1,"category":"","scope":1},{"id":22,"name":"longitude","value":-47.0543323,"l":[],"type":1,"category":"","scope":1},{"id":23,"name":"timestamp","value":1714999644007,"l":[],"type":1,"category":"","scope":1}],"type":0,"category":"","scope":1}

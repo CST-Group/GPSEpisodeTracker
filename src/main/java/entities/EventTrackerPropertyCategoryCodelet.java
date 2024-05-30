@@ -22,7 +22,8 @@ public abstract class EventTrackerPropertyCategoryCodelet extends Codelet {
     private Idea objectInitialState;
     private Idea objectFinalState;
 
-    private double deltaTime = 60;
+//    private double deltaTime = 60;
+    private double deltaTime = 1;
 
 
     public EventTrackerPropertyCategoryCodelet()    {
@@ -48,7 +49,7 @@ public abstract class EventTrackerPropertyCategoryCodelet extends Codelet {
             this.objectInitialState = getObjectCurrentState();
             this.initialTime = getObjectTime(this.objectInitialState);
         }
-
+//        System.out.println(objectInitialState.toStringFull());
         this.objectFinalState = getObjectCurrentState();
         this.finalTime = getObjectTime(this.objectFinalState);
 
